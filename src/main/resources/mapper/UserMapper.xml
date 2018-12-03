@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.primeton.dao.UserMapper">
+	<resultMap id="User" type="com.primeton.entity.User">
+		<id column="uid" property="uid" />
+		<result column="userName" property="userName" />
+		<result column="userPassword" property="userPassword" />
+		<result column="name" property="name" />
+		<result column="age" property="age" />
+		<result column="sex" property="sex" />
+		<result column="did" property="did" />
+		<!-- 多对一的关系 -->
+		<!-- property: 指的是属性的值, javaType：指的是属性的类型 -->
+		<association property="department" javaType="com.primeton.entity.Department">
+			<id column="dep_id" property="dep_id" />
+			<result column="dep_name" property="dep_name" />
+			<result column="dep_xjId" property="dep_xjId" />
+			<result column="dep_xjName" property="dep_xjName" />
+		</association>
+	</resultMap>
+
+	<!-- 添加用户 -->
+	<insert id="insertUser" parameterType="com.primeton.entity.User">
+		INSERT INTO
+		WANGXINGYU_USER
+		(uid,userName,userPassword,name,age,sex,did)
+		VALUES
+		(#{uid},#{userName},#{userPassword},#{name},#{age},#{sex},#{did});
+	</insert>
+
+	<!-- 通过用户名查询员工信息 -->
+	<select id="SelectUserByName" parameterType="java.lang.String"
+		resultType="com.primeton.entity.User">
+		SELECT uid,userName,userPassword,name,age,sex,did FROM
+		WANGXINGYU_USER WHERE
+		userName = #{userName};
+	</select>
+
+	<!--分页查询用户信息 -->
+	<select id="selectUser" parameterType="java.lang.String"
+		resultType="com.primeton.entity.User">
+		SELECT
+		u.uid,u.userName,u.userPassword,u.name,u.age,u.sex,u.did,d.dep_name
+		FROM wangxingyu_user u LEFT JOIN wangxingyu_department d
+		ON(u.did=d.dep_id)
+		WHERE u.userName LIKE #{userName};
+
+	</select>
+
+
+	<!--根据用户密码查询用户信息 -->
+	<select id="selectUserByPassword" parameterType="java.lang.String"
+		resultType="com.primeton.entity.User">
+		SELECT uid,userName,userPassword,name,age,sex,did FROM
+		WANGXINGYU_USER WHERE
+		userPassword = #{userPassword};
+	</select>
+
+	<!--根据用户id查询用户信息 -->
+	<select id="selectUserById" parameterType="java.lang.Integer"
+		resultType="com.primeton.entity.User">
+		SELECT uid,username,userPassword,NAME,age,sex,did FROM
+		WANGXINGYU_USER WHERE
+		uid=#{uid};
+	</select>
+
+	<!--根据id删除用户信息 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		DELETE FROM
+		wangxingyu_user WHERE uid=#{uid};
+	</delete>
+
+	<!--根据用户Id更新用户字段 -->
+	<update id="update" parameterType="com.primeton.entity.User">
+		UPDATE WANGXINGYU_USER SET
+		userName=#{userName},userPassword=#{userPassword},
+		NAME=#{name},AGE=#{age},SEX=#{sex},DID=#{did} WHERE uid = #{uid};
+	</update>
+
+	<!--根据用户名更新用户字段 -->
+	<update id="updateByName" parameterType="com.primeton.entity.User">
+		UPDATE WANGXINGYU_USER
+		SET userName=#{userName},userPassword=#{userPassword},
+		NAME=#{name},AGE=#{age},SEX=#{sex},DID=#{did} WHERE userName =
+		#{userName};
+	</update>
+
+	<!--登陆 -->
+	<select id="login" parameterType="java.lang.String" resultType="com.primeton.entity.User">
+		SELECT uid,userName,userPassword FROM wangxingyu_user
+		WHERE userName=
+		#{userName} AND userPassword = #{userPassword};
+	</select>
+
+
+</mapper>

@@ -1,0 +1,4 @@
+2018-11-21 17:01:23,718 INFO (StartupInfoLogger.java:50)- Starting SpringbootMybatisApplication on DESKTOP-G382AU4 with PID 18672 (started by 17710 in E:\Elipse工作空间\wangxingyu-demo)
+2018-11-21 17:01:23,725 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.0.0.RELEASE, Spring v5.0.4.RELEASE
+2018-11-21 17:01:23,729 INFO (SpringApplication.java:652)- No active profile set, falling back to default profiles: default
+2018-11-21 17:01:30,583 INFO (StartupInfoLogger.java:59)- Started SpringbootMybatisApplication in 8.032 seconds (JVM running for 8.513)
