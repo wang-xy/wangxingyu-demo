@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.primeton.controller.UserController;
-import com.primeton.entity.User;
-import com.primeton.exception.DemoException;
+import com.primeton.wangxingyu.controller.UserController;
+import com.primeton.wangxingyu.entity.User;
+import com.primeton.wangxingyu.exception.DemoException;
 
 /**
  * 员工信息的增删改查、登录测试
